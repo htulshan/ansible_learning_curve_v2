@@ -1,0 +1,21 @@
+- name: Run show commands on routers
+  hosts: cisco_routers
+  gather_facts: false
+
+  tasks:
+    - name: run show ip int brief
+      ios_command:
+        commands: show ip int brief
+    
+    - name: run show ip arp
+      ios_command:
+        commands: show ip arp
+
+- name: Run command on R1
+  hosts: 192.168.0.149
+  gather_facts: false
+
+  tasks:
+    - name: runn show int status
+      ios_command:
+        commands: show clock
