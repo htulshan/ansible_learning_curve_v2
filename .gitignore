@@ -1,0 +1,61 @@
+# ==========================================
+# Ansible Core Runtime & Logs
+# ==========================================
+# Default root path for local Ansible configurations
+.ansible/
+# Retry files generated for failed playbook runs
+*.retry
+
+# ==========================================
+# External Dependencies & Roles
+# ==========================================
+# Downloaded community roles from Ansible Galaxy
+roles/contrib/
+roles/external/
+# Alternative path if downloaded directly into project root
+galaxy_roles/
+# Downloaded community collections
+collections/
+
+# ==========================================
+# Sensitive Credentials (DO NOT COMMIT)
+# ==========================================
+# Vault password files containing plain-text keys
+.ansible_vault_password
+*vault_pass*
+# Local environment variables containing secrets
+.env
+.env.*
+
+# ==========================================
+# Environment & Local Overrides
+# ==========================================
+# Local Vagrant environments used for testing playbooks
+.vagrant/
+vagrant/
+# Local testing/debugging configuration overrides
+local_config.yml
+vbox_host.cfg
+*.log
+
+# ==========================================
+# Python & OS Artifacts
+# ==========================================
+# Compiled Python files used by Ansible modules
+*.py[co]
+__pycache__/
+# OS-specific metadata files
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Python Virtual Environments
+# ==========================================
+# Standard venv naming conventions
+.venv/
+venv/
+env/
+
+# Custom or alternative venv directory names
+ENV/
+target/
