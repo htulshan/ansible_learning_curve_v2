@@ -1,1 +1,15 @@
 ansible_learning_curve_v2
+
+- Tasks:
+    git:
+      Practice PR : Not Started
+      Implement CI/CD pipeline : Not Started
+      Create requirements file : Completed  
+    Ansible:
+      Use Vault to store secrets : Not Started
+    Jinja2:
+      Learn the syntax: Not Started
+    Yaml:
+      Learn the syntax: Not Started
+    Docker:
+      Package the project: Not Started

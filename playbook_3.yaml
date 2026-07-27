@@ -1,0 +1,14 @@
+- name: Run show commands on router
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: run show ip int brief
+      ios_command:
+        commands: show ip int br
+      register: show_ip_int_brief_result
+
+    - name: debug registered var
+      debug:
+        msg: "IP not found"
+      when: "'4.4.4.4' not in show_ip_int_brief_result.stdout[0]"
