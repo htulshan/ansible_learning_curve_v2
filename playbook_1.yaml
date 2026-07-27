@@ -1,11 +1,11 @@
-- name: Run show commands on routers
-  hosts: cisco_routers
-  gather_facts: false
+- name: Run show commands on routers # this is known as a play, multiple plays contitute a playbook
+  hosts: cisco_routers # this is the devices on which the play will be executed
+  gather_facts: false # this disables facts gathering which ansible does by default
 
   tasks:
-    - name: run show ip int brief
-      ios_command:
-        commands: show ip int brief
+    - name: run show ip int brief # this is a task within a play, it is executed in the order its defined.
+      ios_command: # this is a mandatory item in a task, to define the module to be used in the task
+        commands: show ip int brief # this is a mandatory item in "ios_command" module
     
     - name: run show ip arp
       ios_command:

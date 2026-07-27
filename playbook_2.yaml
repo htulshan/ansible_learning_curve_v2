@@ -6,7 +6,7 @@
     - name: run show ip int br
       ios_command:
         commands: show ip int br
-      register: sh_ip_int_br_result
+      register: sh_ip_int_br_result # to save the output from the task in a variable
 
     - name: Debug registered var
-      debug: var=sh_ip_int_br_result.stdout_lines
+      debug: var=sh_ip_int_br_result.stdout_lines # debug module is used to display the variable previously created on the commandline

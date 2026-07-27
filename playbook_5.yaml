@@ -1,0 +1,13 @@
+- name: test wait_for
+  hosts: cisco_routers
+
+  tasks:
+    - name: run show commands
+      ios_command:
+        commands: ping 192.168.0.1 timeout 1
+        wait_for: # test a particular condition to be true to mark this task successful
+          - result[0] contains "Success rate is 100 percent"
+        match: all # do I match "all" or "any" wait_for condtion to mark this task as successful
+        retries: 2 # how many time do I retry the task, default is 10
+        interval: 12 # interval between retries, default is 1 sec
+

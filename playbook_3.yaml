@@ -10,5 +10,5 @@
 
     - name: debug registered var
       debug:
-        msg: "IP not found"
-      when: "'4.4.4.4' not in show_ip_int_brief_result.stdout[0]"
+        msg: "IP not found" # that is the message displayed
+      when: "'4.4.4.4' not in show_ip_int_brief_result.stdout[0]" # when is used to excute the task if the condition is met.

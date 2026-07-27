@@ -1,0 +1,16 @@
+- name: run show commands on cisco router
+  hosts: cisco_routers
+
+  tasks:
+    - name: run show commands
+      ios_command:
+        commands: # commands can be a list of commands to be executed on the devices
+          - show ip int br
+          - show ip route
+      register: show_result
+
+    - name: debug registered commands
+      debug: var=show_result.stdout_lines # this is a list, if not index is provided the entire list is displayed
+
+    - name: debug show ip int br
+      debug: var=show_result.stdout_line[0] # only output from the first command is displayed
