@@ -1,0 +1,40 @@
+- name: testing match in ios_config
+  hosts: cisco_routers
+
+  tasks:
+
+ #   - name: adding ACL lines to config
+ #     ios_config:
+ #       before:
+ #         - no ip access-list standard test1
+ #       parents: 
+ #         - ip access-list extended test1
+ #       lines:
+ #         - permit ip any any
+ #       save_when: modified
+
+    - name: get current config
+      ios_command:
+        commands:
+          - show run
+      register: showoutput
+
+    - name: display current config
+      debug:
+        var: showoutput.stdout_lines
+  
+    - name: test line match
+      ios_config:
+        parents:
+          - ip access-list extended test1
+        lines:
+          - permit icmp any any
+          - permit tcp any any eq www
+          - permit tcp any any eq 22
+        save_when: modified
+      register: cfg
+
+    - name: print output
+      debug:
+        var: cfg.updates
+      when: cfg.changed

@@ -1,0 +1,20 @@
+- name: testing after
+  hosts: 192.168.0.149
+
+  tasks:
+    - name: changing config after
+      ios_config:
+        parents:
+          - interface Ethernet0/1
+        lines:
+          - ip address 10.1.1.1 255.255.255.0
+        after:
+          - no shut
+        backup: yes
+        save_when: modified
+      register: cfg
+
+    - name: show changes
+      debug: 
+        var: cfg.updates
+      when: cfg.changed
