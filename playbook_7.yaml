@@ -1,0 +1,11 @@
+- name: run config commands on router
+  hosts: cisco_routers
+
+  tasks:
+    - name: configure password encryption
+      ios_config:
+        lines:
+          - service password-encryption
+          - no ip http server
+          - no ip http secure-server
+          - no ip domain lookup

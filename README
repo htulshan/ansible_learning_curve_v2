@@ -7,6 +7,7 @@ ansible_learning_curve_v2
       Create requirements file : Completed  
     Ansible:
       Use Vault to store secrets : Not Started
+      Rollback
     Jinja2:
       Learn the syntax: Not Started
     Yaml:

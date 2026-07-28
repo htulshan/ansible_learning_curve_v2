@@ -1,0 +1,11 @@
+- name: run config commands on router
+  hosts: cisco_routers
+
+  tasks:
+    - name: run config commands on routers
+      ios_config:
+        parents:
+          - line vty 0 4
+        lines:
+          - login local
+          - exec-timeout 0 0
