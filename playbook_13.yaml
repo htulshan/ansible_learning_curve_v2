@@ -1,0 +1,34 @@
+- name: play to test ios_config replace parameter
+  hosts: cisco_routers
+  gather_facts: no
+
+  tasks:
+    - name: get preconfig
+      ios_command:
+        commands:
+          - show run | sec access-list
+      register: preconfig
+
+    - name: save preconfig
+      copy:
+        content: "{{ preconfig.stdout_lines | to_nice_json }}"
+        dest: "./{{ inventory_hostname }}_preconfig.json"
+
+    - name: apply config
+      ios_config:
+        before:
+          - no ip access-list extended test1
+        parents:
+          - ip access-list extended test1
+        lines:
+          - permit tcp any any eq 24
+        replace: block
+        backup: yes
+        save_when: modified
+      register: applied_config
+
+    - name: show applied config
+      copy:
+        content: "{{applied_config.updates | to_nice_json }}"
+        dest: "{{inventory_hostname}}_applied_config.json"
+      when: applied_config.changed

@@ -1,0 +1,53 @@
+- name: test ios_config exact parameter
+  hosts: cisco_routers
+
+  tasks:
+
+  - name: get preconfig
+    ios_command:
+      commands:
+        - show run | sec access-list
+    register: pre_config
+
+  - name: display preconfig
+    debug:
+      var: pre_config
+
+  - name: save pre_config.stdout.lines
+    copy:
+      content: "{{ pre_config.stdout | to_nice_json }}"
+      dest: "./{{inventory_hostname}}_preconfig.json"
+
+  - name: run ios_config exact paramenter
+    ios_config:
+      backup: yes
+      before:
+        - no ip access-list extended test1
+      parents:
+        - ip access-list extended test1
+      lines:
+        - permit tcp any any eq www
+        - permit tcp any any eq 22
+        - permit icmp any any
+        - deny   ip any any
+      save_when: modified
+      match: exact
+    register: cfg
+
+  - name: show changes applied
+    debug:
+      var: cfg.updates
+    when: cfg.changed
+
+
+  - name: get postconfig
+    ios_command:
+      commands:
+        - show run | sec access-list
+    register: post_config
+
+  - name: display postconfig
+    debug:
+      var: post_config.stdout_lines
+
+      
