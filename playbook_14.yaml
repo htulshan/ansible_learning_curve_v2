@@ -1,0 +1,23 @@
+- name: testing 'src' parameter of ios_config module
+  hosts: 192.168.0.149
+
+  tasks:
+
+    - name: Take backup
+      ios_config:
+        backup: yes
+        lines:
+          - show version
+      check_mode: true
+
+    - name: push config
+      ios_config:
+        src: templates/playbook_14_config.j2
+        save_when: modified
+      register: result
+
+    - name: save config_applied
+      copy:
+        content: "{{result.updates | to_nice_json}}"
+        dest: "./console_logs/{{inventory_hostname}}_console.json"
+      when: result.changed

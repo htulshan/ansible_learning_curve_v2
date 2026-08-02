@@ -1,0 +1,8 @@
+interface loopback{{mgmt_intf}}
+ ip address {{mgmt_ip}} 255.255.255.255
+
+router ospf 1
+ router-id {{mgmt_ip}}
+ {% for ip in ospf_intf %}
+  network {{ip}} 0.0.0.0 area 0
+ {% endfor %}
