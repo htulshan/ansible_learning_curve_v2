@@ -8,6 +8,7 @@ ansible_learning_curve_v2
     Ansible:
       Use Vault to store secrets : Not Started
       Rollback
+      Build a module of your own
     Jinja2:
       Learn the syntax: Not Started
     Yaml:

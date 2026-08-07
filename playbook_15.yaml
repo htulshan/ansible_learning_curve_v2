@@ -1,0 +1,13 @@
+- name: test gather_network_resources
+  hosts: cisco_routers
+
+  tasks:
+    - name: run gather_network_resources
+      ios_facts:
+#        gather_subset: min
+        gather_network_resources:
+          - interfaces
+    
+    - name: display output
+      debug:
+        var: ansible_network_resources
