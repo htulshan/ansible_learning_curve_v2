@@ -1,0 +1,19 @@
+- name: test ntc_ansible module
+  hosts: cisco_routers
+  connection: local #Instructs Ansible to execute the module script locally on the Ansible control machine rather than running commands inside a remote Linux system shell.
+
+  tasks:
+    - name: run show commands
+      ntc_show_command:
+        connecction: ssh
+        platform: "cisco_ios"
+        command: "sh ip int brief"
+        host: "{{ inventory_hostname }}"
+        username: "cisco"
+        password: "cisco"
+        template_dir: "library/ntc-ansible/ntc-templates/templates"
+      register: result
+
+    - name: show output
+      debug: var=result
+
